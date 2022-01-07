@@ -1,40 +1,21 @@
 class Solution {
 public:
     string longestPalindrome(string s) {
-        int len = s.length();
-        int max_len = 1, start = 0;
-        bool dp[len][len];
-        memset(dp, 0, sizeof(dp));
-        
-        for (int i = 0 ; i < len ; i++)
-            dp[i][i] = true;
-        
-        for (int i = 0 ; i < len - 1 ; i++) {
-            if (s[i] == s[i + 1]){
-                dp[i][i + 1] = true;
-                start = i;
-                max_len = 2;
-            }
+        int mx = 0, st = -1;
+        for(int i = 0 ; i < s.length() ; i++) {
+            int max_odd = get_max(s, i - 1, i + 1, 1);
+            int max_even = get_max(s, i - 1, i, 0);
+            int max_palindrome = max(max_odd, max_even);
+            if(max_palindrome > mx)
+                mx = max_palindrome, st = i - (max_palindrome >> 1);
         }
-        
-        for (int k = 3 ; k <= len ; k++) {
-            for (int i = 0 ; i < len - k + 1 ; i++) {
-                int st = i, ed = st + k - 1;
-                if (dp[st + 1][ed - 1] && s[st] == s[ed]) {
-                    dp[st][ed] = true;
-                    if (k > max_len)
-                        max_len = k, start = i;
-                }
-            }
-        }
-        return form_answer(start, max_len, s);
+        return s.substr(st, mx);
     }
     
 private:
-    string form_answer (int start, int str_len, string &s) {
-        string ret = "";
-        for (int i = start ; i <= start + str_len - 1 ; i++)
-            ret += s[i];
-        return ret;
+    int get_max(string &s, int p1, int p2, int res) {
+        if(p1 < 0 || p2 >= s.length() || s[p1] != s[p2])
+            return res;
+        return get_max(s, p1 - 1, p2 + 1, res + 2);
     }
 };
