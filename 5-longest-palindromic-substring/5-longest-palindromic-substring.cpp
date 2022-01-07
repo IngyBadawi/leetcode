@@ -14,8 +14,11 @@ public:
     
 private:
     int get_max(string &s, int p1, int p2, int res) {
-        if(p1 < 0 || p2 >= s.length() || s[p1] != s[p2])
-            return res;
-        return get_max(s, p1 - 1, p2 + 1, res + 2);
+        while(p1 >= 0 && p2 < s.length()) {
+            if(s[p1] != s[p2])
+                break;
+            res += 2, p1--, p2++;
+        }
+        return res;
     }
 };
