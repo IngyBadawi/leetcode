@@ -7,12 +7,16 @@ public:
         vector<string> path;
         vector<vector<string>> ans;
         dfs(0, s, path, ans, dp);
+        cout<<"cnt = "<<cnt<<endl;
+        cout<<"ans size = "<<ans.size()<<endl;
         return ans;
     }
     
 private:
+    int cnt = 0;
     void dfs(int start_ind, string &s, vector<string> path, vector<vector<string>> &ans,
              vector<vector<bool>> &dp) {
+        cnt++;
         if (start_ind == s.length()) {
             ans.push_back(path);
             return;
