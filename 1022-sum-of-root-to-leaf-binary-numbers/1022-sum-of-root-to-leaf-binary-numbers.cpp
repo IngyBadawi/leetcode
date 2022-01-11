@@ -12,26 +12,27 @@
 class Solution {
 public:
     int sumRootToLeaf(TreeNode* root) {
-        int ans = 0, path = 0;
-        dfs(root, path, ans);
-        return ans;
+        int path = 0;
+        return dfs(root, path);
     }
     
 private:
-    void dfs(TreeNode *root, int path, int &ans) {
+    int dfs(TreeNode *root, int path) {
         if (!root)
-            return;
+            return 0;
         
         path = path << 1;
         path |= root->val;
         
         if (leaf_node(root)) {
-            ans += path;
-            return;
+            return path;
         }
-        dfs(root->left, path, ans);
-        dfs(root->right, path, ans);
+        
+        int left = dfs(root->left, path);
+        int right = dfs(root->right, path);
         path = path >> 1;
+        
+        return left + right;
     }
     
     bool leaf_node(TreeNode *node) {
