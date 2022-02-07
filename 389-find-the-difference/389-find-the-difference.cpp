@@ -1,21 +1,13 @@
 class Solution {
 public:
     char findTheDifference(string s, string t) {
-        vector<int> freq_s = get_freq(s);
-        vector<int> freq_t = get_freq(t);
+        sort(s.begin(), s.end());
+        sort(t.begin(), t.end());
         
-        for (int i = 0 ; i < 26 ; i++) {
-            if (freq_s[i] != freq_t[i])
-                return (i + 'a');
+        for (int i = 0 ; i < s.length() ; i++) {
+            if (s[i] != t[i])
+                return t[i];
         }
-        return 0;
-    }
-    
-private:
-    vector<int> get_freq(string s) {
-        vector<int> freq(26);
-        for (char c : s)
-            freq[c - 'a']++;
-        return freq;
+        return t[t.length() - 1];
     }
 };
