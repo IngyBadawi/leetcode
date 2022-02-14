@@ -8,11 +8,8 @@ public:
 private:
     int solve(int row, int col, vector<string> &grid) {
         int n = grid.size();
-        if (row == n) {
-            if(non_attacking(grid))
-                return 1;
-            return 0;
-        }
+        if (row == n) 
+            return 1;
         
         if (!valid_point(row, col, n))
             return 0;
