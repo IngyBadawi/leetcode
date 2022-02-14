@@ -20,9 +20,6 @@ private:
             return;
         
         for (int i = 0 ; i < n ; i++) {
-            if (abs(col - i) <= 1 && row && col)
-                continue;
-            
             grid[row][i] = 'Q';
             if (non_attacking(grid))
                 solve(row + 1, i, ret, grid);
