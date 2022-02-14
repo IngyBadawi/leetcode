@@ -11,8 +11,7 @@ private:
     void solve(int row, int col, vector<vector<string>> &ret, vector<string> &grid) {
         int n = grid.size();
         if (row == n) {
-            if(non_attacking(grid))
-                ret.push_back(grid);
+            ret.push_back(grid);
             return;
         }
         
