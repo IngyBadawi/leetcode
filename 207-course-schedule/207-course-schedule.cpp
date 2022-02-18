@@ -20,7 +20,6 @@ public:
         }
         
         for (int i = 0 ; i < numCourses ; i++) {
-            cout<<"vis["<<i<<"] = "<<vis[i]<<endl;
             if (!vis[i])
                 return false;
         }
