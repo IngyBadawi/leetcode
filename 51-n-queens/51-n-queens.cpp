@@ -20,7 +20,7 @@ private:
         
         for (int i = 0 ; i < n ; i++) {
             grid[row][i] = 'Q';
-            if (non_attacking(grid))
+            if (non_attacking(grid, row, i))
                 solve(row + 1, i, ret, grid);
             grid[row][i] = '.';
         }
@@ -30,38 +30,31 @@ private:
         return (row >= 0 && row < n && col >= 0 && col < n);
     }
     
-    bool non_attacking(vector<string> &grid) {
+    bool non_attacking(vector<string> &grid, int r, int c) {
         int n = grid.size();
         
-        // Check rows
+        int cnt = 0;
         for (int i = 0 ; i < n ; i++) {
-            int cnt = 0;
-            for (int j = 0 ; j < n ; j++) {
-                if (grid[i][j] == 'Q')
-                    cnt++;
-            }
-            if (cnt != 1 && cnt != 0)
-                return false;
+            if (grid[r][i] == 'Q')
+                cnt++;
         }
+        if (cnt != 1)
+            return false;
         
-        // Check columns
+        cnt = 0;
         for (int i = 0 ; i < n ; i++) {
-            int cnt = 0;
-            for (int j = 0 ; j < n ; j++) {
-                if (grid[j][i] == 'Q')
-                    cnt++;
-            }
-            if (cnt != 1 && cnt != 0)
-                return false;
+            if (grid[i][c] == 'Q')
+                cnt++;
         }
-        
+        if (cnt != 1)
+            return false;
         
         // Check diagonals
         int dr[4] = {-1, 1, 1, -1};
         int dc[4] = {1, 1, -1, -1};
         
-        for (int i = 0 ; i < n ; i++) {
-            for (int j = 0 ; j < n ; j++) {
+        for (int i = r ; i < n ; i++) {
+            for (int j = c ; j < n ; j++) {
                 if (grid[i][j] == 'Q') {
                     for (int k = 0 ; k < 4 ; k++) {
                         int new_r = i + dr[k];
@@ -76,7 +69,6 @@ private:
                 }
             }
         }
-        
         return true;
     }
     
