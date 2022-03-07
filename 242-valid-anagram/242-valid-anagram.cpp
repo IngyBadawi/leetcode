@@ -4,8 +4,8 @@ public:
         if (s.length() != t.length())
             return false;
         
-        // return solution_one(s, t);
-        return solution_two(s, t);
+        return solution_one(s, t);
+        // return solution_two(s, t);
     }
     
 private:
