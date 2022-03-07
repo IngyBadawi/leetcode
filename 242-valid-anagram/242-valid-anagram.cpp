@@ -10,6 +10,7 @@ public:
     
 private:
     bool solution_two(string s, string t) {
+        // O(nlogn)
         sort(s.begin(), s.end());
         sort(t.begin(), t.end());
         for (int i = 0 ; i < s.length() ; i++) {
@@ -20,6 +21,7 @@ private:
     }
     
     bool solution_one(string s, string t) {
+        // O(n), n is the max string length
         vector<int> f1 = get_freq(s);
         vector<int> f2 = get_freq(t);
         return compare(f1, f2);
