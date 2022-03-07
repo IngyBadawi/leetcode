@@ -1,8 +1,8 @@
 class Solution {
 public:
     bool canConstruct(string ransomNote, string magazine) {
-        // return sol_one(ransomNote, magazine);
-        return sol_two(ransomNote, magazine);
+        return sol_one(ransomNote, magazine);
+        // return sol_two(ransomNote, magazine);
     }
     
 private:
